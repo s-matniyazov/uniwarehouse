@@ -1,0 +1,28 @@
+server:
+  port: 8088
+spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/uniwarehouse
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+        enable_lazy_load_no_trans: true
+# swagger-ui custom path
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui"
+  show-actuator: true

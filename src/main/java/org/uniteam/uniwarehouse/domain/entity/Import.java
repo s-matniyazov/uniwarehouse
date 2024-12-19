@@ -4,6 +4,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import org.uniteam.uniwarehouse.domain.entity.base.BaseIdEntity;
@@ -27,7 +28,8 @@ public class Import extends BaseIdEntity {
     @OneToMany(mappedBy = "importP", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ImportProduct> products;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(targetEntity = Warehouse.class)
+    @JoinColumn(name = "warehouses_id", referencedColumnName = "id")
     private Warehouse warehouse;
 
     public Import() {}

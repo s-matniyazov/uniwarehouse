@@ -14,6 +14,9 @@ public interface UriConstants {
     String PRODUCT_QUALITIES = API + "/product/qualities";
     String WAREHOUSE = API + "/warehouses";
     String IMPORTS = API + "/imports";
+    String ORDERS = API + "/orders";
+    String ORDER_STATUSES = API + "/order/statuses";
+    String ORDER_MODEL_STATUSES = API + "/order/model/statuses";
 
     String ICONS = API + "/icons";
 }

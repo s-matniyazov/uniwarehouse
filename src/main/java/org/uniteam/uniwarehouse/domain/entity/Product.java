@@ -37,7 +37,6 @@ public class Product extends BaseNameEntity {
     @JoinColumn(name = "product_statuses_id", referencedColumnName = "id")
     private ProductStatus status;
 
-    // todo: productlar listi ( quramina alatin productilar ) ( typena qaray alatin qiliwam bo'liwam mumkin { shunday quramdag'i productlardi o'z quramina aladi })
     @OneToMany(targetEntity = InProduct.class, mappedBy = "ownerProduct")
     private List<InProduct> inProducts;
 

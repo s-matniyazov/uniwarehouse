@@ -1,5 +1,6 @@
 package org.uniteam.uniwarehouse.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -37,23 +38,21 @@ public class ProductService extends BaseService {
         this.productStatusRepository = productStatusRepository;
     }
 
-    private Specification<Product> filter(ProductFilter filters) {
-        Specification<Product> spec = Specification.where(ProductFilterSpecifications.hasName(filters.name()));
-        if (filters.productStatusesId() != null) {
-            spec.and(ProductFilterSpecifications.hasStatus(
-                            productStatusRepository.findById(filters.productStatusesId()).orElseThrow(() -> new NotFoundException(mSourceBundle.apply("product.status.not_found")))));
-        }
-
-        spec.and(ProductFilterSpecifications.hasType(
-                productTypeRepository.findById(filters.productTypesId()).orElseThrow(() -> new NotFoundException(mSourceBundle.apply("product.type.not_found"))))
-        );
-        return spec;
-    }
-
     public List<Product> get(ProductFilter filters) {
-        return repository.findAll(filter(filters));
+        Specification<Product> spec =
+                Specification.where(ProductFilterSpecifications.hasName(filters.name()))
+                        .and(ProductFilterSpecifications.hasStatus(
+                                filters.productStatusesId() != null
+                                        ? productStatusRepository.findById(filters.productStatusesId()).orElseThrow(() -> new NotFoundException(mSourceBundle.apply("product.status.not_found")))
+                                        : null)
+                        ).and(ProductFilterSpecifications.hasType(
+                                productTypeRepository.findById(filters.productTypesId()).orElseThrow(() -> new NotFoundException(mSourceBundle.apply("product.type.not_found"))))
+                        );
+
+        return repository.findAll(spec);
     }
 
+    @Transactional
     public Product save(ProductDTO data) {
         Unit unit = unitRepository.findById(data.unitId()).orElseThrow(() -> new NotFoundException(mSourceBundle.apply("product.unit.not_found")));
         ProductQuality quality = qualityRepository.findById(data.qualityId()).orElseThrow(() -> new NotFoundException(mSourceBundle.apply("product.quality.not_found")));

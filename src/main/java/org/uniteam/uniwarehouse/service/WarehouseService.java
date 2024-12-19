@@ -1,5 +1,6 @@
 package org.uniteam.uniwarehouse.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.uniteam.uniwarehouse.data.dto.WarehouseDTO;
@@ -39,6 +40,7 @@ public class WarehouseService extends BaseService {
         return repository.findAll();
     }
 
+    @Transactional
     public Warehouse save(WarehouseDTO data) {
         ProductType productType = productTypeRepository.findById(data.productTypeId()).orElseThrow(() -> new NotFoundException(mSourceBundle.apply("product.type.not_found")));
 

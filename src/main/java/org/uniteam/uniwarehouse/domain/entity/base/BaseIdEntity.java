@@ -16,6 +16,13 @@ public abstract class BaseIdEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    public BaseIdEntity() {
+    }
+
+    public BaseIdEntity(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -21,6 +21,7 @@ public class Warehouse extends BaseIdEntity {
     private ProductType type;
 
     public Warehouse() {
+        super();
     }
 
     public Warehouse(String name, ProductType type) {

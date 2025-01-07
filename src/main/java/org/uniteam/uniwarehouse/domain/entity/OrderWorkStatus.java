@@ -9,4 +9,6 @@ import org.uniteam.uniwarehouse.domain.entity.base.BaseNameEntity;
  * @created : 16 дек. 2024
  **/
 @Entity(name = "order_work_statuses")
-public class OrderWorkStatus extends BaseNameEntity {}
+public class OrderWorkStatus extends BaseNameEntity {
+    private Boolean isInitial;
+}

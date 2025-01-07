@@ -23,4 +23,14 @@ public class OrderWork extends BaseIdEntity {
     @ManyToOne(targetEntity = OrderWorkStatus.class)
     @JoinColumn(name = "order_work_statuses_id", referencedColumnName = "id")
     private OrderWorkStatus status;
+
+    public OrderWork() {
+    }
+
+    public OrderWork(String name, Integer count, Order order, OrderWorkStatus orderWorkStatus) {
+        this.name = name;
+        this.count = count;
+        this.order = order;
+        this.status = orderWorkStatus;
+    }
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.OneToOne;
 import org.uniteam.uniwarehouse.domain.entity.base.BaseIdEntity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class Order extends BaseIdEntity {
     private OrderModel model;
 
     @OneToMany(mappedBy = "order")
-    private List<OrderWork> works;
+    private List<OrderWork> works = new ArrayList<>();
 
     public Order() {}
 

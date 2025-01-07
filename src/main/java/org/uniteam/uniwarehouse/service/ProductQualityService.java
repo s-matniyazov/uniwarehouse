@@ -1,5 +1,6 @@
 package org.uniteam.uniwarehouse.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.uniteam.uniwarehouse.domain.entity.ProductQuality;
@@ -26,6 +27,7 @@ public class ProductQualityService extends BaseService {
         return repository.findAll();
     }
 
+    @Transactional
     public ProductQuality save(ProductQuality data) {
         return repository.save(data);
     }

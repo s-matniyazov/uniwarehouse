@@ -1,5 +1,6 @@
 package org.uniteam.uniwarehouse.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.uniteam.uniwarehouse.domain.entity.OrderModelStatus;
@@ -26,6 +27,7 @@ public class OrderModelStatusService extends BaseService {
         return repository.findAll();
     }
 
+    @Transactional
     public OrderModelStatus save(OrderModelStatus data) {
         return repository.save(data);
     }

@@ -1,5 +1,6 @@
 package org.uniteam.uniwarehouse.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.uniteam.uniwarehouse.domain.entity.Icon;
@@ -25,6 +26,7 @@ public class IconService {
         return repository.findAll();
     }
 
+    @Transactional
     public Icon save(Icon data) {
         Icon icon = new Icon(data.getContent());
         if (data.getCode() != null) icon.setCode(data.getCode());

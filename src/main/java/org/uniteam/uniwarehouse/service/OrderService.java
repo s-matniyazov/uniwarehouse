@@ -1,5 +1,6 @@
 package org.uniteam.uniwarehouse.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.uniteam.uniwarehouse.data.dto.OrderDTO;
@@ -45,6 +46,7 @@ public class OrderService extends BaseService {
         return repository.findAll();
     }
 
+    @Transactional
     public Order save(OrderDTO data) {
         return repository.save(
                 new Order(
@@ -58,6 +60,7 @@ public class OrderService extends BaseService {
         );
     }
 
+    @Transactional
     public OrderModel modelSave(OrderModelDTO data) {
         OrderModel model;
         if (data.id() != null)
@@ -82,6 +85,7 @@ public class OrderService extends BaseService {
         return modelRepository.save(model);
     }
 
+    @Transactional
     public List<OrderWork> workSave(Integer orderId, List<OrderWorkDTO> data) {
         Order order = repository.findById(orderId).orElseThrow(() -> new NotFoundException(mSourceBundle.apply("order.not_found")));
         List<OrderWork> works = data.stream().map(it -> new OrderWork(
